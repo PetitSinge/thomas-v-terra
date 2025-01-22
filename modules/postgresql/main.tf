@@ -5,11 +5,11 @@ resource "azurerm_postgresql_flexible_server" "postgresql" {
   administrator_login = var.admin_username
   administrator_password = var.admin_password
 
-  sku_name   = "GP_Standard_D2s_v3"
-  storage_mb = 32768
-  version    = "13"
+  sku_name   = var.sku_name
+  storage_mb = var.storage_mb
+  version    = var.version
 
-  delegated_subnet_id = azurerm_subnet.subnet_vm.id
+  delegated_subnet_id = var.delegated_subnet_id
 
   backup {
     retention_days = 7
