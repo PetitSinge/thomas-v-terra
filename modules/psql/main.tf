@@ -9,7 +9,7 @@ resource "azurerm_postgresql_flexible_server" "postgresql" {
   storage_mb          = var.storage_mb
   delegated_subnet_id = var.delegated_subnet_id
 
-  private_dns_zone_id = azurerm_private_dns_zone.postgresql_dns.id
+  public_network_access_enabled = false
 
   high_availability {
     mode = var.ha_mode
@@ -17,6 +17,7 @@ resource "azurerm_postgresql_flexible_server" "postgresql" {
 
   tags = var.tags
 }
+
 
 resource "azurerm_private_dns_zone" "postgresql_dns" {
   name                = "privatelink.postgres.database.azure.com"
