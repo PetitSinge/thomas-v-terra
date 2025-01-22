@@ -48,6 +48,13 @@ variable "delegated_subnet_id" {
   type        = string
 }
 
+variable "version" {
+  description = "PostgreSQL version"
+  type        = string
+  default     = "13"
+}
+
+
 variable "backup_retention_days" {
   description = "Number of days to retain backups"
   type        = number

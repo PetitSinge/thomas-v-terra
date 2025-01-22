@@ -17,3 +17,8 @@ output "container_names" {
   value       = azurerm_storage_container.containers[*].name
   description = "Names of the Storage Account containers"
 }
+
+output "name" {
+  value       = azurerm_storage_account.storage.name
+  description = "Name of the storage account"
+}
