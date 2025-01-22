@@ -59,7 +59,6 @@ module "psql" {
   admin_password      = var.db_admin_password
   sku_name            = var.db_sku_name
   storage_mb          = var.db_storage_mb
-  delegated_subnet_id = module.network.subnet_ids[0]
   backup_retention_days = 7
   ha_mode             = "ZoneRedundant"
   tags                = {
