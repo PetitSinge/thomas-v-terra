@@ -42,7 +42,7 @@ variable "container_names" {
   type        = list(string)
 }
 
-variable "storage_account_name" {
+variable "account_name" {
   description = "Base name for the storage account"
   type        = string
 }
