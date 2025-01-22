@@ -36,25 +36,16 @@ variable "storage_mb" {
   default     = 32768
 }
 
-variable "psql_version" {
+variable "postgres_version" {
   description = "Version of PostgreSQL"
   type        = string
   default     = "13"
 }
 
-
 variable "delegated_subnet_id" {
   description = "ID of the delegated subnet for the PostgreSQL server"
   type        = string
 }
-
-variable "postgres_version" {
-  description = "PostgreSQL version"
-  type        = string
-  default     = "13"
-}
-
-
 
 variable "backup_retention_days" {
   description = "Number of days to retain backups"
