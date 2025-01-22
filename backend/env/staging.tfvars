@@ -12,3 +12,4 @@ tags = {
   project     = "terraform"
 }
 subscription_id = "0696952d-ddcb-4855-a2de-0068909dbc91" 
+storage_account_name = "myprojectstorage"

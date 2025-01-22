@@ -69,17 +69,12 @@ module "psql" {
   }
 }
 
-
-
-
-
-
 # Appel au module "storage_account"
 module "storage_account" {
   source              = "../modules/storage_account"
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
-  storage_account_name = "myprojectstoragedetoto"
+  storage_account_name = var.storage_account_name
   account_tier        = "Standard"
   replication_type    = "LRS"
   allow_blob_public_access = false
