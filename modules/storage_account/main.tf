@@ -17,18 +17,3 @@ resource "azurerm_storage_container" "containers" {
   storage_account_name   = azurerm_storage_account.storage.name
   container_access_type  = var.container_access_type
 }
-
-output "storage_account_id" {
-  value       = azurerm_storage_account.storage.id
-  description = "ID of the Storage Account"
-}
-
-output "storage_account_name" {
-  value       = azurerm_storage_account.storage.name
-  description = "Name of the Storage Account"
-}
-
-output "container_names" {
-  value       = azurerm_storage_container.containers[*].name
-  description = "Names of the Storage Account containers"
-}

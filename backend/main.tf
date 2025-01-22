@@ -43,7 +43,6 @@ module "psql" {
   admin_password      = var.db_admin_password
   sku_name            = "Standard_B2ms"
   storage_mb          = 32768
-  version             = "13"
   delegated_subnet_id = module.network.subnet_ids[0]
   backup_retention_days = 7
   ha_mode             = "ZoneRedundant"

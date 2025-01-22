@@ -16,13 +16,3 @@ resource "azurerm_subnet" "subnet" {
 
   tags = var.subnet_configs[count.index].tags
 }
-
-output "vnet_id" {
-  value       = azurerm_virtual_network.vnet.id
-  description = "ID of the virtual network"
-}
-
-output "subnet_ids" {
-  value       = [for subnet in azurerm_subnet.subnet : subnet.id]
-  description = "List of subnet IDs"
-}

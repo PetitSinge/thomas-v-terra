@@ -21,8 +21,3 @@ resource "azurerm_postgresql_flexible_server" "postgresql" {
 
   tags = var.tags
 }
-
-output "fqdn" {
-  value       = azurerm_postgresql_flexible_server.postgresql.fqdn
-  description = "Fully Qualified Domain Name of the PostgreSQL server"
-}
