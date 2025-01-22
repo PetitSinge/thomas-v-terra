@@ -34,11 +34,6 @@ variable "db_storage_mb" {
   type        = number
 }
 
-# Storage Account variables
-variable "storage_account_name" {
-  description = "Name of the storage account"
-  type        = string
-}
 
 variable "storage_account_sku" {
   description = "SKU for the storage account"
