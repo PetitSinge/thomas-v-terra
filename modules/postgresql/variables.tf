@@ -33,6 +33,11 @@ variable "storage_mb" {
   type        = number
 }
 
+variable "pg_version" {
+  description = "PostgreSQL version"
+  type        = string
+  default     = "13"
+}
 
 variable "delegated_subnet_id" {
   description = "Delegated subnet ID"

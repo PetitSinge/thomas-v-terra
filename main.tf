@@ -103,6 +103,7 @@ module "postgresql" {
   admin_password      = var.pg_admin_password
   sku_name            = "GP_Standard_D2s_v3"
   storage_mb          = 32768
+  pg_version          = "13"
   delegated_subnet_id = azurerm_subnet.subnet_vm.id
 }
 

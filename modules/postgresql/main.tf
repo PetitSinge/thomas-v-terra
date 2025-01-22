@@ -7,20 +7,12 @@ resource "azurerm_postgresql_flexible_server" "postgresql" {
 
   sku_name   = var.sku_name
   storage_mb = var.storage_mb
-  version    = var.version
+  version    = var.pg_version
 
   delegated_subnet_id = var.delegated_subnet_id
 
-  backup {
-    retention_days = 7
-  }
-
   high_availability {
     mode = "ZoneRedundant"
-  }
-
-  storage {
-    auto_grow_enabled = true
   }
 }
 
