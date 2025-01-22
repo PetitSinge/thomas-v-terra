@@ -63,3 +63,8 @@ variable "tags" {
     project     = "terraform"
   }
 }
+
+variable "subscription_id" {
+  description = "Azure subscription ID"
+  type        = string
+}
