@@ -48,11 +48,12 @@ variable "delegated_subnet_id" {
   type        = string
 }
 
-variable "psq_version" {
+variable "postgres_version" {
   description = "PostgreSQL version"
   type        = string
   default     = "13"
 }
+
 
 
 variable "backup_retention_days" {
