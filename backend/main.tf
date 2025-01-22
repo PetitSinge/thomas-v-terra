@@ -57,17 +57,18 @@ module "psql" {
   server_name         = "${var.prefix}-postgresql"
   admin_username      = var.db_admin_username
   admin_password      = var.db_admin_password
-  sku_name            = "GP_Standard_D2s_v3"
-  storage_mb          = 32768
+  sku_name            = var.db_sku_name
+  storage_mb          = var.db_storage_mb
   delegated_subnet_id = module.network.subnet_ids[0]
-  vnet_id             = module.network.vnet_id # Ajout ici
+  private_dns_zone_id = azurerm_private_dns_zone.postgresql_dns_zone.id
   backup_retention_days = 7
   ha_mode             = "ZoneRedundant"
-  tags = {
+  tags                = {
     environment = "backend"
     team        = "database"
   }
 }
+
 
 # Appel au module "storage_account"
 module "storage_account" {
