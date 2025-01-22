@@ -4,9 +4,10 @@ output "storage_account_id" {
 }
 
 output "storage_account_name" {
+  description = "Generated storage account name"
   value       = azurerm_storage_account.storage.name
-  description = "Name of the Storage Account"
 }
+
 
 output "primary_blob_endpoint" {
   value       = azurerm_storage_account.storage.primary_blob_endpoint

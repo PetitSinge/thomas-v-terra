@@ -7,7 +7,7 @@ resource "azurerm_postgresql_flexible_server" "postgresql" {
   version             = var.postgres_version
   sku_name            = var.sku_name
   storage_mb          = var.storage_mb
-  delegated_subnet_id = var.delegated_subnet_id
+  delegated_subnet_id = null
 
   # Active l'accès public
   public_network_access_enabled = true

@@ -1,11 +1,11 @@
-resource "random_string" "storage_suffix" {
-  length  = 6
-  special = false
-  upper   = false
+resource "random_pet" "storage_account_name" {
+  length    = 2
+  separator = "-"
 }
 
+
 resource "azurerm_storage_account" "storage" {
-  name                     = var.storage_account_name
+  name = "${random_pet.storage_account_name.id}"
   resource_group_name      = var.resource_group_name
   location                 = var.location
   account_tier             = var.account_tier

@@ -59,6 +59,7 @@ module "psql" {
   admin_password      = var.db_admin_password
   sku_name            = var.db_sku_name
   storage_mb          = var.db_storage_mb
+  delegated_subnet_id = module.network.subnet_ids[0]
   backup_retention_days = 7
   ha_mode             = "ZoneRedundant"
   tags                = {
@@ -73,7 +74,7 @@ module "storage_account" {
   source                   = "../modules/storage_account"
   resource_group_name      = azurerm_resource_group.rg.name
   location                 = azurerm_resource_group.rg.location
-  storage_account_name     = var.storage_account_name # Correct
+  storage_account_name     = var.storage_account_name
   account_tier             = "Standard"
   replication_type         = "LRS"
   allow_blob_public_access = false
