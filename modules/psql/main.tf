@@ -15,10 +15,6 @@ resource "azurerm_postgresql_flexible_server" "postgresql" {
     mode = var.ha_mode
   }
 
-  backup {
-    retention_days = var.backup_retention_days
-  }
-
   tags = var.tags
 }
 
