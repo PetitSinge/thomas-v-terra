@@ -49,3 +49,17 @@ variable "prefix" {
   description = "Prefix for naming Azure resources"
   type        = string
 }
+variable "postgres_version" {
+  description = "Version of PostgreSQL"
+  type        = string
+  default     = "13"
+}
+
+variable "tags" {
+  description = "Tags to apply to resources"
+  type        = map(string)
+  default     = {
+    environment = "staging"
+    project     = "terraform"
+  }
+}
