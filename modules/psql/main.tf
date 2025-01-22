@@ -1,5 +1,4 @@
 resource "azurerm_postgresql_flexible_server" "postgresql" {
-resource "azurerm_postgresql_flexible_server" "postgresql" {
   name                = var.server_name
   resource_group_name = var.resource_group_name
   location            = var.location
@@ -34,4 +33,3 @@ resource "azurerm_private_dns_zone_virtual_network_link" "vnet_link" {
   resource_group_name   = var.resource_group_name
   virtual_network_id    = var.vnet_id
 }
-
