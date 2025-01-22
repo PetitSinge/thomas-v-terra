@@ -1,5 +1,5 @@
 resource "azurerm_postgresql_flexible_server" "postgresql" {
-  name                = "${var.prefix}-postgresql"
+  name                = var.server_name
   resource_group_name = var.resource_group_name
   location            = var.location
   administrator_login = var.admin_username
@@ -7,16 +7,22 @@ resource "azurerm_postgresql_flexible_server" "postgresql" {
 
   sku_name   = var.sku_name
   storage_mb = var.storage_mb
-  version    = var.pg_version
+  version    = var.version
 
   delegated_subnet_id = var.delegated_subnet_id
 
-  high_availability {
-    mode = "ZoneRedundant"
+  backup {
+    retention_days = var.backup_retention_days
   }
+
+  high_availability {
+    mode = var.ha_mode
+  }
+
+  tags = var.tags
 }
 
-output "postgresql_host" {
-  value = azurerm_postgresql_flexible_server.postgresql.fqdn
+output "fqdn" {
+  value       = azurerm_postgresql_flexible_server.postgresql.fqdn
+  description = "Fully Qualified Domain Name of the PostgreSQL server"
 }
-

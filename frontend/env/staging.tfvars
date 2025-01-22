@@ -1,0 +1,5 @@
+resource_group_name = "staging-frontend-rg"
+location            = "East US"
+prefix              = "staging-frontend"
+app_service_plan_tier = "Basic"
+app_service_plan_size = "B1"

@@ -1,0 +1,5 @@
+resource_group_name = "prod-frontend-rg"
+location            = "North Europe"
+prefix              = "prod-frontend"
+app_service_plan_tier = "Premium"
+app_service_plan_size = "P1v2"

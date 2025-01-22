@@ -1,0 +1,5 @@
+resource_group_name = "preprod-frontend-rg"
+location            = "West Europe"
+prefix              = "preprod-frontend"
+app_service_plan_tier = "Standard"
+app_service_plan_size = "S1"
