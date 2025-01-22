@@ -94,11 +94,15 @@ resource "azurerm_linux_virtual_machine" "linux_vm" {
   }
 }
 
-output "public_ip" {
-  value = azurerm_public_ip.public_ip_vm.ip_address
-}
-
-output "private_key_path" {
-  value = var.ssh_private_key_path
+module "postgresql" {
+  source              = "./modules/postgresql"
+  resource_group_name = azurerm_resource_group.rg_vm.name
+  location            = azurerm_resource_group.rg_vm.location
+  prefix              = var.prefix
+  admin_username      = var.pg_admin_username
+  admin_password      = var.pg_admin_password
+  version             = var.pg_version
+  sku_name            = var.pg_sku_name
+  storage_mb          = var.pg_storage_mb
 }
 

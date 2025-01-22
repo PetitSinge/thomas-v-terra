@@ -53,3 +53,32 @@ variable "vm_version" {
   type        = string
 }
 
+variable "pg_admin_username" {
+  description = "Admin username for PostgreSQL"
+  type        = string
+  default     = "pgadmin"
+}
+
+variable "pg_admin_password" {
+  description = "Admin password for PostgreSQL"
+  type        = string
+}
+
+variable "pg_version" {
+  description = "Version of PostgreSQL"
+  type        = string
+  default     = "13"
+}
+
+variable "pg_sku_name" {
+  description = "SKU name for PostgreSQL instance"
+  type        = string
+  default     = "GP_Gen5_2"
+}
+
+variable "pg_storage_mb" {
+  description = "Storage size for PostgreSQL instance (in MB)"
+  type        = number
+  default     = 51200
+}
+

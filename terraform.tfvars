@@ -9,4 +9,4 @@ vm_publisher        = "Canonical"
 vm_offer            = "0001-com-ubuntu-server-focal"
 vm_sku              = "20_04-lts-gen2"
 vm_version          = "latest"
-
+pg_admin_password   = "securepassword"
