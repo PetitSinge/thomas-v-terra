@@ -8,3 +8,7 @@ db_storage_mb           = 51200
 storage_account_name    = "mystorageaccount"
 storage_account_sku     = "Standard_LRS"
 prefix = "myproject"
+tags = {
+  environment = "staging"
+  project     = "terraform"
+}
