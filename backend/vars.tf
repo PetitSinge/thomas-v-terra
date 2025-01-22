@@ -44,3 +44,8 @@ variable "storage_account_sku" {
   description = "SKU for the storage account"
   type        = string
 }
+
+variable "prefix" {
+  description = "Prefix for naming Azure resources"
+  type        = string
+}

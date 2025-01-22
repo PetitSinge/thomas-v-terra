@@ -7,3 +7,4 @@ db_sku_name             = "GP_Gen5_2"
 db_storage_mb           = 51200
 storage_account_name    = "mystorageaccount"
 storage_account_sku     = "Standard_LRS"
+prefix = "myproject"
