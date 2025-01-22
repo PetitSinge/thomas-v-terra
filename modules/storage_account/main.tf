@@ -4,12 +4,8 @@ resource "azurerm_storage_account" "storage" {
   location                 = var.location
   account_tier             = var.account_tier
   account_replication_type = var.replication_type
-
-  allow_blob_public_access = var.allow_blob_public_access
-  enable_https_traffic_only = var.enable_https_traffic_only
-
-  tags = var.tags
 }
+
 
 resource "azurerm_storage_container" "containers" {
   count                  = length(var.container_names)

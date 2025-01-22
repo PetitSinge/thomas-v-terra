@@ -8,11 +8,9 @@ resource "azurerm_virtual_network" "vnet" {
 }
 
 resource "azurerm_subnet" "subnet" {
-  count               = length(var.subnet_configs)
-  name                = var.subnet_configs[count.index].name
-  resource_group_name = var.resource_group_name
+  count                = length(var.subnet_configs)
+  name                 = var.subnet_configs[count.index].name
+  resource_group_name  = var.resource_group_name
   virtual_network_name = azurerm_virtual_network.vnet.name
-  address_prefixes    = var.subnet_configs[count.index].address_prefixes
-
-  tags = var.subnet_configs[count.index].tags
+  address_prefixes     = var.subnet_configs[count.index].address_prefixes
 }
