@@ -11,9 +11,6 @@ resource "azurerm_postgresql_flexible_server" "postgresql" {
 
   delegated_subnet_id = var.delegated_subnet_id
 
-  backup {
-    retention_days = var.backup_retention_days
-  }
 
   high_availability {
     mode = var.ha_mode
