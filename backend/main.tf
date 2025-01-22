@@ -2,6 +2,15 @@ provider "azurerm" {
   features {}
   subscription_id = var.subscription_id
 }
+resource "random_string" "storage_suffix" {
+  length  = 6
+  upper   = false
+  special = false
+}
+
+locals {
+  storage_account_name = "${var.prefix}storage${random_string.storage_suffix.result}"
+}
 
 
 resource "azurerm_resource_group" "rg" {
@@ -70,18 +79,19 @@ module "storage_account" {
   source              = "../modules/storage_account"
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
-  account_name        = "${var.prefix}storage"
+  account_name        = local.storage_account_name
   account_tier        = "Standard"
   replication_type    = "LRS"
   allow_blob_public_access = false
   enable_https_traffic_only = true
-  container_names = ["app-data", "logs", "backups"]
+  container_names     = ["app-data", "logs", "backups"]
   container_access_type = "private"
   tags = {
     environment = "backend"
     team        = "storage"
   }
 }
+
 
 output "network_vnet_id" {
   description = "ID of the virtual network"
