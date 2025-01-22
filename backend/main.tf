@@ -39,24 +39,28 @@ module "network" {
 
 
 # Appel au module "psql"
-module "psql" {
-  source              = "../modules/psql"
-  resource_group_name = azurerm_resource_group.rg.name
-  location            = azurerm_resource_group.rg.location
-  server_name         = "${var.prefix}-postgresql"
-  admin_username      = var.db_admin_username
-  admin_password      = var.db_admin_password
-  sku_name            = "Standard_B2ms"
-  storage_mb          = 32768
-  postgres_version    = "13"
-  delegated_subnet_id = module.network.subnet_ids[0]
-  backup_retention_days = 7
-  ha_mode             = "ZoneRedundant"
-  tags = {
-    environment = "backend"
-    team        = "database"
+resource "azurerm_postgresql_flexible_server" "postgresql" {
+  name                = var.server_name
+  resource_group_name = var.resource_group_name
+  location            = var.location
+  administrator_login = var.admin_username
+  administrator_password = var.admin_password
+  version             = var.postgres_version # Correction ici
+  sku_name            = var.sku_name
+  storage_mb          = var.storage_mb
+  delegated_subnet_id = var.delegated_subnet_id
+
+  backup {
+    retention_days = var.backup_retention_days
   }
+
+  high_availability {
+    mode = var.ha_mode
+  }
+
+  tags = var.tags
 }
+
 
 
 
