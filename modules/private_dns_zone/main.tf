@@ -1,9 +1,8 @@
-resource "azurerm_private_dns_zone" "dns_zone" {
-  name                = var.zone_name
+resource "azurerm_private_dns_zone" "postgresql_dns_zone" {
+  name                = "postgres.database.azure.com"
   resource_group_name = var.resource_group_name
-
-  tags = var.tags
 }
+
 
 resource "azurerm_private_dns_zone_virtual_network_link" "vnet_links" {
   count                = length(var.vnet_ids)

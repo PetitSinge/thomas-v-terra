@@ -1,13 +1,21 @@
+resource "random_string" "storage_suffix" {
+  length  = 6
+  special = false
+  upper   = false
+}
+
 resource "azurerm_storage_account" "storage" {
-  name                     = var.account_name
+  name                     = "${var.storage_account_name}${random_string.storage_suffix.result}"
   resource_group_name      = var.resource_group_name
   location                 = var.location
   account_tier             = var.account_tier
   account_replication_type = var.replication_type
-  tags                     = var.tags
+
+  allow_nested_items_to_be_public = var.allow_blob_public_access
+  https_traffic_only_enabled      = var.enable_https_traffic_only
+
+  tags = var.tags
 }
-
-
 
 
 resource "azurerm_storage_container" "containers" {
@@ -16,9 +24,4 @@ resource "azurerm_storage_container" "containers" {
   storage_account_id = azurerm_storage_account.storage.id
   container_access_type  = var.container_access_type
 }
-resource "random_string" "suffix" {
-  length  = 4
-  upper   = false
-  special = false
-  numeric  = true
-}
+
