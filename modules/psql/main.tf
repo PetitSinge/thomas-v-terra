@@ -8,28 +8,16 @@ resource "azurerm_postgresql_flexible_server" "postgresql" {
   sku_name            = var.sku_name
   storage_mb          = var.storage_mb
   delegated_subnet_id = var.delegated_subnet_id
-  private_dns_zone_id = var.private_dns_zone_id
 
-  public_network_access_enabled = false
+  # Active l'accès public
+  public_network_access_enabled = true
+
+  # Supprime l'association avec une zone DNS privée
+  # private_dns_zone_id = var.private_dns_zone_id (supprimé)
 
   high_availability {
     mode = var.ha_mode
   }
 
   tags = var.tags
-}
-
-
-
-
-resource "azurerm_private_dns_zone" "postgresql_dns" {
-  name                = "privatelink.postgres.database.azure.com"
-  resource_group_name = var.resource_group_name
-}
-
-resource "azurerm_private_dns_zone_virtual_network_link" "vnet_link" {
-  name                  = "${var.server_name}-dns-link"
-  private_dns_zone_name = azurerm_private_dns_zone.postgresql_dns.name
-  resource_group_name   = var.resource_group_name
-  virtual_network_id    = var.vnet_id
 }

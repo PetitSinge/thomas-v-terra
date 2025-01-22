@@ -60,7 +60,6 @@ module "psql" {
   sku_name            = var.db_sku_name
   storage_mb          = var.db_storage_mb
   delegated_subnet_id = module.network.subnet_ids[0]
-  private_dns_zone_id = azurerm_private_dns_zone.postgresql_dns_zone.id
   backup_retention_days = 7
   ha_mode             = "ZoneRedundant"
   tags                = {

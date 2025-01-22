@@ -69,7 +69,3 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
-variable "private_dns_zone_id" {
-  description = "ID of the private DNS zone to associate with the PostgreSQL server"
-  type        = string
-}
