@@ -35,6 +35,11 @@ variable "storage_mb" {
   type        = number
   default     = 32768
 }
+variable "vnet_id" {
+  description = "ID of the virtual network"
+  type        = string
+}
+
 
 variable "postgres_version" {
   description = "Version of PostgreSQL"

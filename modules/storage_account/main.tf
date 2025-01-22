@@ -1,5 +1,5 @@
 resource "azurerm_storage_account" "storage" {
-  name                     = var.account_name
+  name                     = "${var.storage_account_name}-${random_string.suffix.result}"
   resource_group_name      = var.resource_group_name
   location                 = var.location
   account_tier             = var.account_tier
@@ -12,4 +12,10 @@ resource "azurerm_storage_container" "containers" {
   name                   = var.container_names[count.index]
   storage_account_id = azurerm_storage_account.storage.id
   container_access_type  = var.container_access_type
+}
+resource "random_string" "suffix" {
+  length  = 4
+  upper   = false
+  special = false
+  number  = true
 }

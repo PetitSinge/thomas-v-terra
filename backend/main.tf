@@ -48,14 +48,18 @@ module "psql" {
   server_name         = "${var.prefix}-postgresql"
   admin_username      = var.db_admin_username
   admin_password      = var.db_admin_password
-  sku_name            = var.db_sku_name
-  storage_mb          = var.db_storage_mb
-  postgres_version    = var.postgres_version
+  sku_name            = "GP_Standard_D2s_v3"
+  storage_mb          = 32768
   delegated_subnet_id = module.network.subnet_ids[0]
+  vnet_id             = module.network.vnet_id # Ajout ici
   backup_retention_days = 7
   ha_mode             = "ZoneRedundant"
-  tags                = var.tags
+  tags = {
+    environment = "backend"
+    team        = "database"
+  }
 }
+
 
 
 
