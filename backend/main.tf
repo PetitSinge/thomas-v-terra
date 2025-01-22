@@ -71,21 +71,22 @@ module "psql" {
 
 # Appel au module "storage_account"
 module "storage_account" {
-  source              = "../modules/storage_account"
-  resource_group_name = azurerm_resource_group.rg.name
-  location            = azurerm_resource_group.rg.location
-  account_name        = var.storage_account_name # Fournit la variable `storage_account_name`
-  account_tier        = "Standard"
-  replication_type    = "LRS"
+  source                   = "../modules/storage_account"
+  resource_group_name      = azurerm_resource_group.rg.name
+  location                 = azurerm_resource_group.rg.location
+  storage_account_name     = var.storage_account_name # Correct
+  account_tier             = "Standard"
+  replication_type         = "LRS"
   allow_blob_public_access = false
   enable_https_traffic_only = true
-  container_names     = ["app-data", "logs", "backups"]
-  container_access_type = "private"
+  container_names          = ["app-data", "logs", "backups"]
+  container_access_type    = "private"
   tags = {
     environment = "backend"
     team        = "storage"
   }
 }
+
 
 
 

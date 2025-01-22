@@ -1,5 +1,5 @@
 variable "storage_account_name" {
-  description = "Base name for the storage account"
+  description = "The name of the storage account"
   type        = string
 }
 
