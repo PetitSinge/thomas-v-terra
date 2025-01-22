@@ -79,7 +79,7 @@ module "storage_account" {
   source              = "../modules/storage_account"
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
-  storage_account_name = "myprojectstorage" # Remplacez par le nom souhaité
+  account_name        = "myprojectstorage" # Remplacez par un nom approprié
   account_tier        = "Standard"
   replication_type    = "LRS"
   allow_blob_public_access = false
@@ -91,6 +91,7 @@ module "storage_account" {
     team        = "storage"
   }
 }
+
 
 
 
