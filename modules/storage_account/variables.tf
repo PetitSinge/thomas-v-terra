@@ -42,10 +42,6 @@ variable "container_names" {
   type        = list(string)
 }
 
-variable "account_name" {
-  description = "Base name for the storage account"
-  type        = string
-}
 
 
 variable "container_access_type" {
