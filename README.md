@@ -31,3 +31,11 @@ Chaque composant est isolé en modules pour permettre une gestion claire et simp
 - Création d'une **zone DNS privée** avec des enregistrements A personnalisables.
 - Intégration des **réseaux frontend et backend** via des liens réseau privés.
 - Support des environnements **staging**, **prod**, **preprod**, et **recette** pour garantir la flexibilité et la séparation des déploiements.
+
+
+
+
+Screenschots Des 2 groupes de ressources pour la prod
+
+![alt text](image.png)
+![alt text](image-1.png)
