@@ -21,4 +21,4 @@ Screenschots Des 2 groupes de ressources
 - Prod      toto-prod
 
 ![alt text](image.png)
-![alt text](image-1.png)
+![alt text](image-3.png)
