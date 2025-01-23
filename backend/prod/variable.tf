@@ -89,10 +89,7 @@ variable "resource_group_name" {
   description = "The name of the Azure resource group."
 }
 
-variable "storage_account_name" {
-  type        = string
-  description = "Name of the storage account."
-}
+
 
 variable "postgresql_server_admin_login" {
   type        = string
@@ -104,19 +101,22 @@ variable "postgresql_server_admin_password" {
   description = "The administrator password of the PostgreSQL server."
 }
 
+
+variable "storage_account_name" {
+  type = string
+  default = ""
+  description = "storage account name"
+}
+
 variable "databases_names" {
   type        = list(string)
-  description = "List of databases to create."
+  description = "List of databases names to create."
+  default     = null
 }
 
 variable "databases_user" {
   type        = string
   description = "The user for the PostgreSQL databases."
-}
-
-variable "databases_password" {
-  type        = string
-  description = "Password for the PostgreSQL databases."
 }
 
 variable "pgbouncer_enabled" {
@@ -136,4 +136,6 @@ variable "postgresql_server_configurations" {
 variable "log_analytics_name" {
   type        = string
   description = "Name of the log analytics workspace."
+  default = ""
+  
 }
