@@ -2,7 +2,7 @@ tenantId             = "b7b023b8-7c32-4c02-92a6-c8cdaa1d189c"
 subscriptionId       = "0696952d-ddcb-4855-a2de-0068909dbc91"
 location             = "francecentral"
 project_name         = "aa06mdo-back"
-resource_group_name  = "m2dospv-rg"
+resource_group_name  = "m2dototo"
 
 ## Route table
 
@@ -20,7 +20,7 @@ storage_account_name = "m2dototo"
 postgresql_server_admin_login    = "psqladmin"
 postgresql_server_admin_password = "H@Sh1CoR3!"
 
-pgbouncer_enabled     = true
+pgbouncer_enabled = true
 databases_names    = ["aa06_m2dospv", "aa06_m1dospv"]
 databases_user     = "m2dospv"
 #databases_password = "acdybc9bzJxWert8C"
