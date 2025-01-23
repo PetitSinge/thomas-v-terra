@@ -1,17 +1,21 @@
 variable "subscriptionId" {
-  type = string
+  type        = string
+  description = "The subscription ID for Azure."
 }
 
 variable "project_name" {
-  type = string
+  type        = string
+  description = "The name of the project."
 }
 
 variable "tenantId" {
-  type = string
+  type        = string
+  description = "The tenant ID for Azure."
 }
 
 variable "location" {
-  type = string
+  type        = string
+  description = "The Azure region for resource deployment."
 }
 
 ## ROUTE Table
@@ -19,66 +23,75 @@ variable "location" {
 variable "route_table_name" {
   type        = string
   default     = "route-table"
-  description = "value of the route table name"
+  description = "Name of the route table."
 }
 
 ## VNET
 
 variable "vnet_name" {
-  type    = string
-  default = "default_vnet"
+  type        = string
+  default     = "default_vnet"
+  description = "Name of the virtual network."
 }
 
 variable "vnet_address_space" {
-  type    = list(string)
-  default = null
+  type        = list(string)
+  default     = null
+  description = "Address space of the virtual network."
 }
 
 variable "subnet_name" {
-  type    = string
-  default = "default_subnet"
+  type        = string
+  default     = "default_subnet"
+  description = "Name of the subnet."
 }
 
 variable "subnet_address_prefixes" {
-  type    = list(string)
-  default = null
-}
-
-## PGSQL - Serveur 1
-variable "pg_hostname_1" {
-  type        = string
-  description = "Hostname for the first PostgreSQL server."
-  default     = "prod-pg-server-1.database.azure.com"
-}
-
-variable "databases_names_1" {
   type        = list(string)
-  description = "List of databases to create on the first PostgreSQL server."
-  default     = ["prod_database_1"]
+  default     = null
+  description = "Address prefixes of the subnet."
 }
 
-## PGSQL - Serveur 2
-variable "pg_hostname_2" {
-  type        = string
-  description = "Hostname for the second PostgreSQL server."
-  default     = "prod-pg-server-2.database.azure.com"
-}
+## PGSQL
 
-variable "databases_names_2" {
-  type        = list(string)
-  description = "List of databases to create on the second PostgreSQL server."
-  default     = ["prod_database_2"]
-}
-
-## Variables partagées PGSQL
 variable "azure_pgvnet_name" {
-  type    = string
-  default = "pgvnet"
+  type        = string
+  default     = "pgvnet"
+  description = "Name of the PostgreSQL VNET."
 }
 
 variable "azure_pgsubnet_name" {
-  type    = string
-  default = "pgsubn"
+  type        = string
+  default     = "pgsubnet"
+  description = "Name of the PostgreSQL subnet."
+}
+
+variable "azure_pg_name" {
+  type        = string
+  default     = "pg"
+  description = "Name of the PostgreSQL server."
+}
+
+variable "pg_hostname" {
+  type        = string
+  default     = "postgres.database.azure.com"
+  description = "Hostname for PostgreSQL server."
+}
+
+variable "instances_number" {
+  type        = number
+  default     = 1
+  description = "The number of instances to deploy."
+}
+
+variable "resource_group_name" {
+  type        = string
+  description = "The name of the Azure resource group."
+}
+
+variable "storage_account_name" {
+  type        = string
+  description = "Name of the storage account."
 }
 
 variable "postgresql_server_admin_login" {
@@ -91,41 +104,36 @@ variable "postgresql_server_admin_password" {
   description = "The administrator password of the PostgreSQL server."
 }
 
-variable "databases_user" {
-  type    = string
-  default = null
+variable "databases_names" {
+  type        = list(string)
+  description = "List of databases to create."
 }
 
-variable "postgresql_databases_password" {
-  type    = string
-  default = null
+variable "databases_user" {
+  type        = string
+  description = "The user for the PostgreSQL databases."
+}
+
+variable "databases_password" {
+  type        = string
+  description = "Password for the PostgreSQL databases."
 }
 
 variable "pgbouncer_enabled" {
   type        = bool
-  description = "Enable pgbouncer."
   default     = false
+  description = "Enable pgbouncer for PostgreSQL."
 }
 
 variable "postgresql_server_configurations" {
   type = map(object({
     value = string
   }))
-  default = null
+  default     = null
+  description = "Custom PostgreSQL server configurations."
 }
-
-## Storage Account
-
-variable "storage_account_name" {
-  type        = string
-  default     = ""
-  description = "storage account name"
-}
-
-## Log Analytics Workspace
 
 variable "log_analytics_name" {
   type        = string
-  default     = ""
-  description = "log analytics name"
+  description = "Name of the log analytics workspace."
 }
