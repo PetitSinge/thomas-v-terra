@@ -22,6 +22,10 @@ databases_user                     = "prod_user"
 databases_password                 = "ProdDbPassword123!" 
 pgbouncer_enabled                  = true
 
+# VNET et Subnet pour PostgreSQL
+azure_pgvnet_name     = "prod-pg-vnet"    
+azure_pgsubnet_name   = "prod-pg-subnet"  
+
 # Configurations spécifiques au serveur PostgreSQL
 postgresql_server_configurations = {
   shared_preload_libraries = {
