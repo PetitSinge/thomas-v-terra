@@ -9,7 +9,6 @@ provider "azurerm" {
 # Module Network
 module "network" {
   source = "../../modules/network"
-
   tenantId         = var.tenantId
   subscriptionId   = var.subscriptionId
   location         = var.location
@@ -22,7 +21,6 @@ module "network" {
 # Module DNS Zone
 module "dns_zone" {
   source = "../../modules/private_dns_zone"
-
   location = var.location
   resource_group_name = var.resource_group_name # Passer le nom correct du RG ici
 }
@@ -30,7 +28,6 @@ module "dns_zone" {
 # Module PostgreSQL
 module "psql" {
   source = "../../modules/psql"
-
   location            = var.location
   azure_pg_name       = var.azure_pg_name
   azure_pgsubnet_name = var.azure_pgsubnet_name

@@ -18,7 +18,6 @@ resource "azurerm_route_table" "route_table" {
     location = var.location
 }
 
-
 resource "azurerm_virtual_network" "example" {
   name                = var.vnet_name
   address_space       = var.vnet_address_space
