@@ -1,110 +1,170 @@
 provider "azurerm" {
   features {}
-  subscription_id = var.subscription_id
-}
-resource "random_string" "storage_suffix" {
-  length  = 6
-  upper   = false
-  special = false
+
+  subscription_id = var.subscriptionId
+  tenant_id       = var.tenantId
+  skip_provider_registration = true
 }
 
-locals {
-  storage_account_name = "${var.prefix}storage${random_string.storage_suffix.result}"
-}
-
-
-resource "azurerm_resource_group" "rg" {
-  name     = var.resource_group_name
-  location = var.location
-}
-
-# Appel au module "network"
 module "network" {
-  source              = "../modules/network"
-  resource_group_name = azurerm_resource_group.rg.name
-  location            = azurerm_resource_group.rg.location
-  vnet_name           = "${var.prefix}-vnet"
-  address_space       = ["10.0.0.0/16"]
-  subnet_configs = [
-    {
-      name            = "${var.prefix}-subnet-1"
-      address_prefixes = ["10.0.1.0/24"]
-      tags            = {
-        environment = "staging"
-      }
-    },
-    {
-      name            = "${var.prefix}-subnet-2"
-      address_prefixes = ["10.0.2.0/24"]
-      tags            = {
-        environment = "staging"
-      }
-    }
-  ]
-  tags = {
-    environment = "staging"
-    project     = "terraform-network"
-  }
+  source = "../modules/network"
+
+  tenantId         = var.tenantId
+  subscriptionId   = var.subscriptionId
+  location         = var.location
+  route_table_name = var.route_table_name
+  project_name     = var.project_name
+  instances_number = var.instances_number
+}
+
+module "dns_zone" {
+  source = "../modules/private_dns_zone"
+  #version = "1.0.0"
+
+  location = var.location
+  resource_group_name = var.resource_group_name
 }
 
 
-
-# Appel au module "psql"
 module "psql" {
-  source              = "../modules/psql"
-  resource_group_name = azurerm_resource_group.rg.name
-  location            = azurerm_resource_group.rg.location
-  server_name         = "${var.prefix}-postgresql"
-  admin_username      = var.db_admin_username
-  admin_password      = var.db_admin_password
-  sku_name            = var.db_sku_name
-  storage_mb          = var.db_storage_mb
-  delegated_subnet_id = module.network.subnet_ids[0]
-  backup_retention_days = 7
-  ha_mode             = "ZoneRedundant"
-  tags                = {
-    environment = "backend"
-    team        = "database"
+  source = "../modules/psql"
+  #version = "1.0.0"
+
+  location            = var.location
+  azure_pg_name       = var.azure_pg_name
+  azure_pgsubnet_name = var.azure_pgsubnet_name
+  azure_pgvnet_name   = var.azure_pgvnet_name
+  project_name        = var.project_name
+  rg_name             = module.network.rg_name
+  pg_hostname         = var.pg_hostname
+  postgresql_server_admin_login = var.postgresql_server_admin_login
+  postgresql_server_admin_password = var.postgresql_server_admin_password
+  postgresql_databases_names = var.databases_names
+  postgresql_databases_user = var.databases_user
+  postgresql_databases_password = var.postgresql_databases_password
+  postgresql_server_pgbouncer_enabled = var.pgbouncer_enabled
+  postgresql_server_configurations = var.postgresql_server_configurations
+}
+
+resource "azurerm_linux_virtual_machine" "example" {
+
+  count = var.instances_number
+
+  name                = "${var.project_name}-${count.index}"
+  resource_group_name = module.network.rg_name
+  location            = var.location
+  size                = "Standard_F2"
+  admin_username      = "adminuser"
+  network_interface_ids = [
+    element(module.network.net_int_id, count.index),
+  ]
+
+  admin_ssh_key {
+    username   = "adminuser"
+    public_key = file("~/.ssh/hexa_rsa.pub")
+    
+  }
+
+  os_disk {
+    caching              = "ReadWrite"
+    storage_account_type = "Standard_LRS"
+  }
+
+  source_image_reference {
+    publisher = "Canonical"
+    offer     = "0001-com-ubuntu-server-jammy"
+    sku       = "22_04-lts"
+    version   = "latest"
+  }
+
+  provisioner "remote-exec" {
+    inline = ["sudo apt install -y nginx && sudo service nginx start"]
+
+    connection {
+      type        = "ssh"
+      host        = element(module.network.ip_address, count.index)
+      user        = "adminuser"
+      private_key = file("~/.ssh/hexa_rsa")
+    }
   }
 }
 
+# resource "azurerm_linux_virtual_machine" "imported_vm" {
 
-# Appel au module "storage_account"
-module "storage_account" {
-  source                   = "../modules/storage_account"
-  resource_group_name      = azurerm_resource_group.rg.name
-  location                 = azurerm_resource_group.rg.location
-  storage_account_name     = var.storage_account_name
-  account_tier             = "Standard"
-  replication_type         = "LRS"
-  allow_blob_public_access = false
-  enable_https_traffic_only = true
-  container_names          = ["app-data", "logs", "backups"]
-  container_access_type    = "private"
-  tags = {
-    environment = "backend"
-    team        = "storage"
-  }
+#   count = var.instances_number
+
+#   name                = "${var.project_name}-${count.index}"
+#   resource_group_name = module.network.rg_name
+#   location            = var.location
+#   size                = "Standard_F2"
+#   admin_username      = "adminuser"
+#   network_interface_ids = [
+#     element(module.network.net_int_id, count.index),
+#   ]
+
+#   admin_ssh_key {
+#     username   = "adminuser"
+#     public_key = file("~/.ssh/hexa_rsa.pub")
+    
+#   }
+
+#   os_disk {
+#     caching              = "ReadWrite"
+#     storage_account_type = "Standard_LRS"
+#   }
+
+#   source_image_reference {
+#     publisher = "Canonical"
+#     offer     = "0001-com-ubuntu-server-jammy"
+#     sku       = "22_04-lts"
+#     version   = "latest"
+#   }
+
+#   provisioner "remote-exec" {
+#     inline = ["sudo apt install -y nginx && sudo service nginx start"]
+
+#     connection {
+#       type        = "ssh"
+#       host        = element(module.network.ip_address, count.index)
+#       user        = "adminuser"
+#       private_key = file("~/.ssh/hexa_rsa")
+#     }
+#   }
+# }
+
+module  "storage_account" {
+  source = "../modules/storage_account"
+
+  
+ storage_account_name = var.storage_account_name
+ resource_group_name = var.resource_group_name
+ location = var.location
+  
 }
 
+module "log_analytics_workspace" {
+  source = "../modules/log_analytics_workspace"
 
-
-
-
-
-
-output "network_vnet_id" {
-  description = "ID of the virtual network"
-  value       = module.network.vnet_id
+  location = var.location
+  resource_group_name = var.resource_group_name
+  log_analytics_name = var.log_analytics_name
 }
 
-output "psql_fqdn" {
-  description = "FQDN of the PostgreSQL server"
-  value       = module.psql.fqdn
-}
+# module "container_registry" {
+#   source = "../modules/container_registry"
 
-output "storage_account_name" {
-  description = "Storage account name"
-  value       = module.storage_account.name
-}
+#   location = var.location
+#   resource_group_name = var.resource_group_name
+#   container_registry_name = var.container_registry_name
+#   container_registry_sku = var.container_registry_sku
+#   container_registry_admin_enabled = var.container_registry_admin_enabled
+#   container_registry_georeplication_locations = var.container_registry_georeplication_locations
+# container_registry_privatelink_name = var.container_registry_privatelink_name
+# container_registry_privatelink_subnet_id = var.container_registry_privatelink_subnet_id
+#   container_registry_regional_endpoint_enabled = var.container_registry_regional_endpoint_enabled
+#   container_registry_zone_redundancy_enabled = var.container_registry_zone_redundancy_enabled
+#   public_network_access_enabled = var.public_network_access_enabled
+#   container_registry_private_dns_zone_ids = var.container_registry_private_dns_zone_ids
+#   tags = var.tags
 
+# }
