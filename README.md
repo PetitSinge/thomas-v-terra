@@ -35,7 +35,9 @@ Chaque composant est isolé en modules pour permettre une gestion claire et simp
 
 
 
-Screenschots Des 2 groupes de ressources pour la prod
+Screenschots Des 2 groupes de ressources 
+- Staging   m2dospv-rg
+- Prod      toto-prod
 
 ![alt text](image.png)
 ![alt text](image-1.png)
