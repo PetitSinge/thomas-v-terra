@@ -3,11 +3,6 @@ variable "subscriptionId" {
   description = "The subscription ID for Azure."
 }
 
-variable "project_name" {
-  type        = string
-  description = "The name of the project."
-}
-
 variable "tenantId" {
   type        = string
   description = "The tenant ID for Azure."
@@ -18,38 +13,9 @@ variable "location" {
   description = "The Azure region for resource deployment."
 }
 
-## ROUTE Table
-
-variable "route_table_name" {
+variable "project_name" {
   type        = string
-  default     = "route-table"
-  description = "Name of the route table."
-}
-
-## VNET
-
-variable "vnet_name" {
-  type        = string
-  default     = "default_vnet"
-  description = "Name of the virtual network."
-}
-
-variable "vnet_address_space" {
-  type        = list(string)
-  default     = null
-  description = "Address space of the virtual network."
-}
-
-variable "subnet_name" {
-  type        = string
-  default     = "default_subnet"
-  description = "Name of the subnet."
-}
-
-variable "subnet_address_prefixes" {
-  type        = list(string)
-  default     = null
-  description = "Address prefixes of the subnet."
+  description = "The name of the project."
 }
 
 ## PGSQL - Serveur 1
@@ -77,14 +43,17 @@ variable "databases_names_2" {
 ## Variables partagées PGSQL
 variable "azure_pgvnet_name" {
   type        = string
-  default     = "pgvnet"
   description = "Name of the PostgreSQL VNET."
 }
 
 variable "azure_pgsubnet_name" {
   type        = string
-  default     = "pgsubnet"
   description = "Name of the PostgreSQL subnet."
+}
+
+variable "resource_group_name" {
+  type        = string
+  description = "The name of the Azure resource group."
 }
 
 variable "postgresql_server_admin_login" {
@@ -119,16 +88,4 @@ variable "postgresql_server_configurations" {
   }))
   default     = null
   description = "Custom PostgreSQL server configurations."
-}
-
-## Storage Account
-variable "storage_account_name" {
-  type        = string
-  description = "Name of the storage account."
-}
-
-## Log Analytics Workspace
-variable "log_analytics_name" {
-  type        = string
-  description = "Name of the log analytics workspace."
 }
