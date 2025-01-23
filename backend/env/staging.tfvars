@@ -13,7 +13,7 @@ route_table_name = "m2dospv-rt"
 vnet_name = "example-vnet"
 vnet_address_space = ["10.0.0.0/16"]
 subnet_name = "example-subnet"
-storage_account_name = "m2dospvstoact001"
+storage_account_name = "m2dototo"
 
 ## Postgresql
 
