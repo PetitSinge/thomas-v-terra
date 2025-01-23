@@ -2,7 +2,7 @@ tenantId             = "b7b023b8-7c32-4c02-92a6-c8cdaa1d189c"
 subscriptionId       = "0696952d-ddcb-4855-a2de-0068909dbc91"
 location             = "francecentral"
 project_name         = "aa06mdo-back"
-resource_group_name  = "toto-stagging"
+resource_group_name  = "toto-staging"
 
 ## Route table
 
