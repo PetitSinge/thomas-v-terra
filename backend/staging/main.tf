@@ -7,7 +7,7 @@ provider "azurerm" {
 }
 
 module "network" {
-  source = "../modules/network"
+  source = "../../modules/network"
 
   tenantId         = var.tenantId
   subscriptionId   = var.subscriptionId
@@ -18,7 +18,7 @@ module "network" {
 }
 
 module "dns_zone" {
-  source = "../modules/private_dns_zone"
+  source = "../../modules/private_dns_zone"
   #version = "1.0.0"
 
   location = var.location
@@ -27,7 +27,7 @@ module "dns_zone" {
 
 
 module "psql" {
-  source = "../modules/psql"
+  source = "../../modules/psql"
   #version = "1.0.0"
 
   location            = var.location
@@ -133,7 +133,7 @@ resource "azurerm_linux_virtual_machine" "example" {
 # }
 
 module  "storage_account" {
-  source = "../modules/storage_account"
+  source = "../../modules/storage_account"
 
   
  storage_account_name = var.storage_account_name
@@ -143,7 +143,7 @@ module  "storage_account" {
 }
 
 module "log_analytics_workspace" {
-  source = "../modules/log_analytics_workspace"
+  source = "../../modules/log_analytics_workspace"
 
   location = var.location
   resource_group_name = var.resource_group_name
@@ -151,7 +151,7 @@ module "log_analytics_workspace" {
 }
 
 # module "container_registry" {
-#   source = "../modules/container_registry"
+#   source = "../../modules/container_registry"
 
 #   location = var.location
 #   resource_group_name = var.resource_group_name
