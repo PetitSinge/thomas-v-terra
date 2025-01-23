@@ -17,7 +17,7 @@ L’architecture est conçue pour répondre aux besoins des environnements de pr
 
 
 Screenschots Des 2 groupes de ressources 
-- Staging   m2dospv-rg
+- Staging   toto-staging
 - Prod      toto-prod
 
 ![alt text](image.png)
