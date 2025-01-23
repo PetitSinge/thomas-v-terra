@@ -7,32 +7,11 @@
 
 ## Description du projet
 
-Ce projet Terraform permet de déployer une infrastructure complète sur Microsoft Azure en utilisant des modules réutilisables pour garantir **modularité**, **maintenabilité** et **cohérence**. 
+Ce projet Terraform permet de déployer une infrastructure ciblée sur Microsoft Azure en mettant l’accent sur la gestion et la configuration optimisée de serveurs PostgreSQL. L’utilisation de modules réutilisables garantit modularité, maintenabilité et cohérence.
 
-L'architecture est conçue pour gérer les environnements suivants :
-
-- **Backend** : Comprend le réseau, la base de données PostgreSQL, et un compte de stockage.
-- **Frontend** : Inclut un Azure Container Registry (ACR), une zone DNS privée, et un réseau pour les ressources frontales.
-
-Chaque composant est isolé en modules pour permettre une gestion claire et simplifiée.
-
+L’architecture est conçue pour répondre aux besoins des environnements de production et de staging, en offrant une solution robuste et flexible pour la gestion des bases de données.
 ---
-
-## Fonctionnalités principales
-
-### Backend
-- Création d'un **réseau virtuel (VNet)** et de sous-réseaux.
-- Déploiement d'un **serveur PostgreSQL flexible** avec haute disponibilité.
-- Provisionnement d'un **compte de stockage Azure** pour les besoins backend.
-- Configuration de **sauvegardes automatiques** et de la **haute disponibilité** pour PostgreSQL.
-
-### Frontend
-- Déploiement d'un **Azure Container Registry (ACR)** pour les images de conteneurs.
-- Création d'une **zone DNS privée** avec des enregistrements A personnalisables.
-- Intégration des **réseaux frontend et backend** via des liens réseau privés.
-- Support des environnements **staging**, **prod**, **preprod**, et **recette** pour garantir la flexibilité et la séparation des déploiements.
-
-
+![alt text](image-2.png)
 
 
 Screenschots Des 2 groupes de ressources 
