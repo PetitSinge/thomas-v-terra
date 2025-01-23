@@ -61,7 +61,7 @@ resource "azurerm_linux_virtual_machine" "example" {
 
   admin_ssh_key {
     username   = "adminuser"
-    public_key = file("~/.ssh/hexa_rsa.pub")
+    public_key = file("~/.ssh/id_rsa.pub")
     
   }
 
@@ -84,7 +84,7 @@ resource "azurerm_linux_virtual_machine" "example" {
       type        = "ssh"
       host        = element(module.network.ip_address, count.index)
       user        = "adminuser"
-      private_key = file("~/.ssh/hexa_rsa")
+      private_key = file("~/.ssh/id_rsa")
     }
   }
 }
@@ -104,7 +104,7 @@ resource "azurerm_linux_virtual_machine" "example" {
 
 #   admin_ssh_key {
 #     username   = "adminuser"
-#     public_key = file("~/.ssh/hexa_rsa.pub")
+#     public_key = file("~/.ssh/id_rsa.pub")
     
 #   }
 
@@ -127,7 +127,7 @@ resource "azurerm_linux_virtual_machine" "example" {
 #       type        = "ssh"
 #       host        = element(module.network.ip_address, count.index)
 #       user        = "adminuser"
-#       private_key = file("~/.ssh/hexa_rsa")
+#       private_key = file("~/.ssh/id_rsa")
 #     }
 #   }
 # }
