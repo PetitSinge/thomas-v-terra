@@ -1,67 +1,105 @@
-variable "server_name" {
-  description = "Name of the PostgreSQL server"
-  type        = string
+variable "resource_group_name" {
+  type = string
+  default = "m2dospv-rg"
 }
 
-variable "resource_group_name" {
-  description = "Name of the resource group"
-  type        = string
+variable "azure_pg_name" {
+  type = string
+}
+
+variable "azure_pgsubnet_name" {
+  type = string
+}
+
+variable "azure_pgvnet_name" {
+  type = string
+}
+
+variable "project_name" {
+  type = string
+}
+
+variable "rg_name" {
+  type = string
+}
+
+variable "pg_hostname" {
+  type = string
+  description = "value of the pg hostname"
 }
 
 variable "location" {
-  description = "Azure region where the PostgreSQL server will be created"
+  type = string
+}
+
+
+
+
+#####
+variable "postgresql_server_admin_login" {
   type        = string
+  description = "The administrator username of the PostgreSQL server."
 }
 
-variable "admin_username" {
-  description = "Admin username for the PostgreSQL database"
+variable "postgresql_server_admin_password" {
   type        = string
+  description = "The administrator password of the PostgreSQL server."
 }
 
-variable "admin_password" {
-  description = "Admin password for the PostgreSQL database"
-  type        = string
-  sensitive   = true
+variable "postgresql_databases_names" {
+  type        = list(string)
+  description = "List of databases names to create."
+  default     = null
 }
 
-variable "sku_name" {
-  description = "SKU for the PostgreSQL server"
-  type        = string
-  default     = "Standard_B2ms"
+variable "postgresql_databases_user" {
+  type    = string
+  default = null
 }
 
-variable "storage_mb" {
-  description = "Storage size for the PostgreSQL server (in MB)"
-  type        = number
-  default     = 32768
+variable "postgresql_databases_password" {
+  type    = string
+  default = null
+}
+variable "postgresql_server_use_vnet_integration" {
+  type        = bool
+  description = "PostgreSQL will use a VNET Integration instead of firewall rules."
+  default     = false
 }
 
-
-variable "postgres_version" {
-  description = "Version of PostgreSQL"
-  type        = string
-  default     = "13"
+variable "postgresql_server_firewall_rule" {
+  type = map(
+    object({
+      start_ip_address = string
+      end_ip_address   = string
+    })
+  )
+  description = "List of Firewall Rule to apply"
+  default = {
+    Public_IP = {
+      start_ip_address = "4.178.181.9"
+      end_ip_address   = "4.178.181.9"
+    }
+  }
 }
 
-variable "delegated_subnet_id" {
-  description = "ID of the delegated subnet for the PostgreSQL server"
-  type        = string
+variable "postgresql_server_pgbouncer_enabled" {
+  type        = bool
+  description = "Enable integrated PgBouncer for PostgreSQL flexible server true/false."
 }
 
-variable "backup_retention_days" {
-  description = "Number of days to retain backups"
-  type        = number
-  default     = 7
-}
-
-variable "ha_mode" {
-  description = "High availability mode for the PostgreSQL server"
-  type        = string
-  default     = "ZoneRedundant" # Options: ZoneRedundant, Disabled
+variable "postgresql_server_configurations" {
+  type = map(
+    object({
+      value = string
+    })
+  )
+  description = "List of configurations to set."
+  default     = {}
 }
 
 variable "tags" {
-  description = "Tags to apply to the PostgreSQL server"
   type        = map(string)
+  description = "Tags"
   default     = {}
 }

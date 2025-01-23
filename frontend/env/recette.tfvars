@@ -1,0 +1,5 @@
+resource_group_name = "recette-frontend-rg"
+location            = "Central US"
+prefix              = "recette-frontend"
+app_service_plan_tier = "Basic"
+app_service_plan_size = "B1"

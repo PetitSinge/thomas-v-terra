@@ -1,33 +1,61 @@
-variable "vnet_name" {
-  description = "Name of the virtual network"
-  type        = string
+variable "subscriptionId" {
+  type = string
+}
+
+variable "tenantId" {
+  type = string
 }
 
 variable "resource_group_name" {
-  description = "Name of the resource group where the network will be created"
-  type        = string
+  type = string
+  default = "m2dospv-rg"
+
 }
 
 variable "location" {
-  description = "Azure location for the network resources"
-  type        = string
+  type = string
+  default = "francecentral"
 }
 
-variable "address_space" {
-  description = "Address space for the virtual network"
-  type        = list(string)
+variable "route_table_name" {
+  type = string
+  default = ""
+  description = "value of the route table name"  
 }
 
-variable "subnet_configs" {
-  description = "Configuration for the subnets"
-  type = list(object({
-    name            = string
-    address_prefixes = list(string)
-    tags            = map(string)
-  }))
+
+variable "project_name" {
+  type = string
 }
 
-variable "tags" {
-  description = "Tags to apply to the network resources"
-  type        = map(string)
+
+variable "instances_number" {
+  type = number
+  default = 1
+}
+
+variable "vnet_name" {
+  type = string
+  default = "example-vnet"
+  description = "value of the vnet name"
+  
+}
+
+variable "vnet_address_space" {
+  type = list(string)
+  default = ["10.0.0.0/16"]
+  
+}
+
+variable "subnet_name" {
+  type = string
+  default = "example-subnet"
+  description = "value of the subnet name"
+  
+}
+
+variable "subnet_address_prefixes" {
+  type = list(string)
+  default = ["10.0.1.0/24"]
+  description = "value of the subnet address prefix"
 }
