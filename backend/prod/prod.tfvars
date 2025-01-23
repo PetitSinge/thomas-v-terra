@@ -8,11 +8,11 @@ project_name         = "toto-project-back"
 resource_group_name  = "toto-prod"
 
 # PostgreSQL - Serveur 1
-pg_hostname_1        = "prod-pg-server-1.database.azure.com"
+pg_hostname_1        = "prod-pg-server-1.postgres.database.azure.com"
 databases_names_1    = ["prod_database_1"]
 
 # PostgreSQL - Serveur 2
-pg_hostname_2        = "prod-pg-server-2.database.azure.com"
+pg_hostname_2        = "prod-pg-server-2.postgres.database.azure.com"
 databases_names_2    = ["prod_database_2"]
 
 # Variables communes PostgreSQL
