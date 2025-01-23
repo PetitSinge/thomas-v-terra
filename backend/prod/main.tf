@@ -7,7 +7,7 @@ provider "azurerm" {
 }
 
 module "network" {
-  source          = "../modules/network"
+  source          = "../../modules/network"
   tenantId        = var.tenantId
   subscriptionId  = var.subscriptionId
   location        = var.location
@@ -17,14 +17,14 @@ module "network" {
 }
 
 module "dns_zone" {
-  source               = "../modules/private_dns_zone"
+  source               = "../../modules/private_dns_zone"
   location             = var.location
   resource_group_name  = var.resource_group_name
 }
 
 # Création du premier serveur PostgreSQL
 module "psql_server_1" {
-  source = "../modules/psql"
+  source = "../../modules/psql"
 
   location                           = var.location
   azure_pg_name                      = "${var.project_name}-pg1"
@@ -44,7 +44,7 @@ module "psql_server_1" {
 
 # Création du second serveur PostgreSQL
 module "psql_server_2" {
-  source = "../modules/psql"
+  source = "../../modules/psql"
 
   location                           = var.location
   azure_pg_name                      = "${var.project_name}-pg2"
@@ -105,14 +105,14 @@ resource "azurerm_linux_virtual_machine" "example" {
 }
 
 module "storage_account" {
-  source                = "../modules/storage_account"
+  source                = "../../modules/storage_account"
   storage_account_name  = var.storage_account_name
   resource_group_name   = var.resource_group_name
   location              = var.location
 }
 
 module "log_analytics_workspace" {
-  source               = "../modules/log_analytics_workspace"
+  source               = "../../modules/log_analytics_workspace"
   location             = var.location
   resource_group_name  = var.resource_group_name
   log_analytics_name   = var.log_analytics_name
