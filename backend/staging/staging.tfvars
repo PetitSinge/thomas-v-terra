@@ -21,7 +21,7 @@ postgresql_server_configurations = {
 
 ## Network
 route_table_name = "toto-staging-rt"
-storage_account_name = "toto-staging-sa"
+storage_account_name = "totostagingsa"
 
 ## Log Analytics
 log_analytics_name = "toto-staging-log"
