@@ -1,6 +1,6 @@
 variable "resource_group_name" {
   type = string
-  default = "m2dospv-rg"
+  default = "totom2dospv-rg"
 }
 
 variable "azure_pg_name" {
