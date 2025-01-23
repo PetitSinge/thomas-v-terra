@@ -4,11 +4,15 @@ location             = "francecentral"
 project_name         = "aa06mdo-back"
 resource_group_name  = "toto-prod"
 
+## Log Analytics Workspace
+log_analytics_name = "toto-prod-log"
+
+## Storage Account
+storage_account_name = "totoprodstorage"
+
 ## Postgresql
-
 postgresql_server_admin_login    = "psqladmin"
-postgresql_server_admin_password = "Pr0dS3cur3P@ss!" # N'oublie pas de mettre un mot de passe sécurisé
-
+postgresql_server_admin_password = "Pr0dS3cur3P@ss!" # Remplace par un mot de passe sécurisé
 pgbouncer_enabled = true
 databases_names    = ["prod_database_1", "prod_database_2"]
 databases_user     = "prod_user"
@@ -17,7 +21,7 @@ postgresql_server_configurations = {
     value = "pg_stat_statements,pgaudit"
   },
   max_connections = {
-    value = "2000" 
+    value = "2000"
   },
   max_wal_size = {
     value = "2048"
